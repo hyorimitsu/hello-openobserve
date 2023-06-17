@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hello-openobserve-api-config
+data:
+  BASE_URL: "/api"
+  PORT: "8080"
