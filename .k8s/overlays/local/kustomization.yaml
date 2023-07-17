@@ -5,3 +5,9 @@ patches:
   - target:
       kind: ConfigMap
     path: api/configmap.yaml
+  - target:
+      kind: StatefulSet
+    path: openobserve/statefulset.yaml
+  - target:
+      kind: ConfigMap
+    path: openobserve/configmap.yaml
