@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: openobserve-config
+  namespace: openobserve
+  labels:
+    app: openobserve-config

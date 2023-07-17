@@ -2,3 +2,5 @@ resources:
   - namespace.yaml
   - api/deployment.yaml
   - api/configmap.yaml
+  - openobserve/statefulset.yaml
+  - openobserve/configmap.yaml
