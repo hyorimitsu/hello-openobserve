@@ -1,5 +1,6 @@
 resources:
   - ../../base
+  - namespace.yaml
   - ingress.yaml
 patches:
   - target:
@@ -11,3 +12,10 @@ patches:
   - target:
       kind: ConfigMap
     path: openobserve/configmap.yaml
+helmCharts:
+  - name: fluent-bit
+    repo: https://fluent.github.io/helm-charts
+    version: 0.36.0
+    namespace: fluent-bit
+    releaseName: fluent-bit
+    valuesFile: fluent-bit-values.yaml
