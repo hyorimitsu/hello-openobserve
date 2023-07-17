@@ -1,6 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: hello-openobserve-api-config
+  name: app-api-config
+  namespace: app
   labels:
-    app: hello-openobserve-api-config
+    app: app-api-config

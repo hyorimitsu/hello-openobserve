@@ -7,7 +7,7 @@ build:
     envTemplate:
       template: "latest"
   artifacts:
-    - image: hello-openobserve/api
+    - image: app/api
       context: ./api
   local:
     push: false

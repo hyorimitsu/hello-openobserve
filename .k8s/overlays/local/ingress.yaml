@@ -1,8 +1,8 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: hello-openobserve-ingress
-  namespace: hello-openobserve
+  name: app-ingress
+  namespace: app
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1$2
 spec:
@@ -10,10 +10,10 @@ spec:
     - host: "hello-openobserve.localhost.com"
       http:
         paths:
-          - path: /(api)(\/.*)
+          - path: /app/(api)(\/.*)
             pathType: Prefix
             backend:
               service:
-                name: hello-openobserve-api
+                name: app-api
                 port:
                   number: 8080
