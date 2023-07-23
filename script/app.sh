@@ -23,7 +23,7 @@ elif [ "x$1" = "xstop" ]; then
     minikube stop --profile "$PROJECT_NAME"
 
 elif [ "x$1" = "xlogs" ]; then
-    NAMESPACES=("hello-openobserve")
+    NAMESPACES=("app" "openobserve" "fluent-bit")
     for NS in ${NAMESPACES[@]}; do
         POD_NAME=$(kubectl get pods -o custom-columns=":metadata.name" -n "$NS" | grep "$2")
         if [ "$POD_NAME" != "" ]; then
