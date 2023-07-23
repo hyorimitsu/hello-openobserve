@@ -75,7 +75,8 @@ Check the [official docs](https://openobserve.ai/docs/ingestion/logs/) for other
 
 ### Usage
 
-To check the logs, please visit the following page in browser.
+To check the logs, please visit the following page in browser.  
+(Please [see here](https://github.com/hyorimitsu/hello-openobserve/blob/main/.k8s/overlays/local/openobserve/configmap.yaml#L6-L7) for `Email` and `Password`)
 
 http://hello-openobserve.localhost.com/web/logs?org_identifier=default
 
