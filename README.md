@@ -13,14 +13,15 @@ This is a sample of logging, metrics and tracing of an application using [OpenOb
 
 ### Used language, tools, and other components
 
-| language/tools                                 | description                                                 |
-|------------------------------------------------|-------------------------------------------------------------|
-| [OpenObserve](https://openobserve.ai/)         | cloud native observability platform (Logs, Metrics, Traces) |
-| [Fluent Bit](https://fluentbit.io/)            | logging and metrics processor and forwarder                 |
-| [Go](https://github.com/golang/go)             | programming language                                        |
-| [Kubernetes](https://kubernetes.io/)           | container orchestrator                                      |
-| [Minikube](https://minikube.sigs.k8s.io/docs/) | tool for quickly sets up a local Kubernetes cluster         |
-| [Skaffold](https://skaffold.dev/)              | tool for building, pushing and deploying your application   |
+| language/tools                                 | description                                                                                                                   |
+|------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|
+| [OpenObserve](https://openobserve.ai/)         | cloud native observability platform (Logs, Metrics, Traces)                                                                   |
+| [Fluent Bit](https://fluentbit.io/)            | logging and metrics processor and forwarder                                                                                   |
+| [OpenTelemetry](https://opentelemetry.io/)     | observability framework for instrumenting, generating, collecting, and exporting telemetry data such as traces, metrics, logs |
+| [Go](https://github.com/golang/go)             | programming language                                                                                                          |
+| [Kubernetes](https://kubernetes.io/)           | container orchestrator                                                                                                        |
+| [Minikube](https://minikube.sigs.k8s.io/docs/) | tool for quickly sets up a local Kubernetes cluster                                                                           |
+| [Skaffold](https://skaffold.dev/)              | tool for building, pushing and deploying your application                                                                     |
 
 ### Directories
 
@@ -46,7 +47,7 @@ This is a sample of logging, metrics and tracing of an application using [OpenOb
 2. Call API
 
    ```shell
-   curl http://hello-openobserve.localhost.com/app/api/
+   curl http://hello-openobserve.localhost.com/app/api/hello
    ```
 
 3. Confirm OpenObserve
@@ -55,7 +56,7 @@ This is a sample of logging, metrics and tracing of an application using [OpenOb
 
    - [Logs](https://github.com/hyorimitsu/hello-openobserve/blob/main/README.md#logs)
    - Metrics (TODO)
-   - Traces (TODO)
+   - [Traces](https://github.com/hyorimitsu/hello-openobserve/blob/main/README.md#traces)
 
 4. Stop the application in minikube
 
@@ -87,3 +88,27 @@ kubernetes_container_name='app-api'
 ```
 
 ![logs_ui](https://github.com/hyorimitsu/hello-openobserve/blob/main/docs/img/logs_ui.png)
+
+
+## Traces
+
+### Architecture
+
+This sample uses [OpenTelemetry](https://opentelemetry.io/) to ingest traces.
+
+![traces_architecture](https://github.com/hyorimitsu/hello-openobserve/blob/main/docs/img/traces_architecture.png)
+
+### Usage
+
+To check the traces, please visit the following page in browser.  
+(Please [see here](https://github.com/hyorimitsu/hello-openobserve/blob/main/.k8s/overlays/local/openobserve/configmap.yaml#L6-L7) for `Email` and `Password`)
+
+http://hello-openobserve.localhost.com/web/traces?org_identifier=default
+
+For example, the traces for this sample application can be obtained with the following query.
+
+```shell
+service_name='hello-openobserve'
+```
+
+![traces_ui](https://github.com/hyorimitsu/hello-openobserve/blob/main/docs/img/traces_ui.png)
