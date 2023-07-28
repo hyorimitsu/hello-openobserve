@@ -3,5 +3,12 @@ kind: ConfigMap
 metadata:
   name: app-api-config
 data:
+  NAME: "hello-openobserve"
+  VERSION: "0.0.1"
+  ENV: "local"
   BASE_URL: "/api"
   PORT: "8080"
+  OTEL_EXPORTER_HOST: "openobserve.openobserve"
+  OTEL_EXPORTER_PORT: "5080"
+  OTEL_EXPORTER_URL_PATH: "/api/default/traces"
+  OTEL_EXPORTER_AUTHORIZATION: "Basic cm9vdEBleGFtcGxlLmNvbTpDb21wbGV4cGFzcyMxMjM="
