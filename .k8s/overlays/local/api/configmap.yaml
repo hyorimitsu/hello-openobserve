@@ -11,4 +11,4 @@ data:
   OTEL_EXPORTER_HOST: "openobserve.openobserve"
   OTEL_EXPORTER_PORT: "5080"
   OTEL_EXPORTER_URL_PATH: "/api/default/traces"
-  OTEL_EXPORTER_AUTHORIZATION: "Basic cm9vdEBleGFtcGxlLmNvbTpqYUZnc0RhMzl1U2VKelNk"
+  OTEL_EXPORTER_AUTHORIZATION: "Basic cm9vdEBleGFtcGxlLmNvbTpDb21wbGV4cGFzcyMxMjM="
