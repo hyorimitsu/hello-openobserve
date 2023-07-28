@@ -1,0 +1,4 @@
+services:
+  go-mod:
+    image: golang:1.20.6-alpine3.18
+    command: sh -c 'go mod tidy && go mod vendor'
