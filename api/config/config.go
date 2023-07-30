@@ -2,12 +2,10 @@ package config
 
 import (
 	"os"
-	"strings"
 )
 
 var (
 	Name                      string
-	NameForPrometheus         string
 	Version                   string
 	Env                       string
 	BaseUrl                   string
@@ -24,7 +22,6 @@ func init() {
 
 func set() {
 	Name = os.Getenv("NAME")
-	NameForPrometheus = strings.ReplaceAll(Name, "-", "_")
 	Version = os.Getenv("VERSION")
 	Env = os.Getenv("ENV")
 	BaseUrl = os.Getenv("BASE_URL")

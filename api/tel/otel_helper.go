@@ -10,16 +10,16 @@ import (
 	"go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp"
 	"go.opentelemetry.io/otel/propagation"
 	"go.opentelemetry.io/otel/sdk/resource"
-	sdktrace "go.opentelemetry.io/otel/sdk/trace"
+	"go.opentelemetry.io/otel/sdk/trace"
 	semconv "go.opentelemetry.io/otel/semconv/v1.4.0"
 )
 
-type OTelHttpConfig struct {
-	ExporterConfig   OTelHttpExporterConfig
-	AttributesConfig OTelHttpAttributesConfig
+type OTelConfig struct {
+	ExporterConfig   OTelExporterConfig
+	AttributesConfig OTelAttributesConfig
 }
 
-type OTelHttpExporterConfig struct {
+type OTelExporterConfig struct {
 	Host          string
 	Port          string
 	UrlPath       string
@@ -27,31 +27,30 @@ type OTelHttpExporterConfig struct {
 	IsEnabledSSL  bool
 }
 
-type OTelHttpAttributesConfig struct {
+type OTelAttributesConfig struct {
 	Name        string
 	Version     string
 	Environment string
 }
 
-func InitOTelHttpTracer(option OTelHttpConfig) (*sdktrace.TracerProvider, error) {
+func InitOTelTracer(cfg OTelConfig) (*trace.TracerProvider, error) {
 	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(
 		propagation.TraceContext{},
 		propagation.Baggage{},
 	))
 
-	otlptracehttp.NewClient()
-
-	otlpHttpExporter, err := newOtlpHttpExporter(option.ExporterConfig)
+	exporter, err := newExporter(cfg.ExporterConfig)
 	if err != nil {
 		return nil, err
 	}
 
-	traceProvider := newTraceProvider(option.AttributesConfig, otlpHttpExporter)
+	traceProvider := newTracerProvider(cfg.AttributesConfig, exporter)
+	otel.SetTracerProvider(traceProvider)
 
 	return traceProvider, nil
 }
 
-func newOtlpHttpExporter(cfg OTelHttpExporterConfig) (*otlptrace.Exporter, error) {
+func newExporter(cfg OTelExporterConfig) (*otlptrace.Exporter, error) {
 	option := []otlptracehttp.Option{
 		otlptracehttp.WithEndpoint(fmt.Sprintf("%s:%s", cfg.Host, cfg.Port)),
 		otlptracehttp.WithURLPath(cfg.UrlPath),
@@ -70,18 +69,17 @@ func newOtlpHttpExporter(cfg OTelHttpExporterConfig) (*otlptrace.Exporter, error
 	return exporter, nil
 }
 
-func newTraceProvider(cfg OTelHttpAttributesConfig, exporter *otlptrace.Exporter) *sdktrace.TracerProvider {
+func newTracerProvider(cfg OTelAttributesConfig, exporter *otlptrace.Exporter) *trace.TracerProvider {
 	res := resource.NewWithAttributes(
 		semconv.SchemaURL,
 		semconv.ServiceNameKey.String(cfg.Name),
 		semconv.ServiceVersionKey.String(cfg.Version),
 		attribute.String("environment", cfg.Environment),
 	)
-	tp := sdktrace.NewTracerProvider(
-		sdktrace.WithSampler(sdktrace.AlwaysSample()),
-		sdktrace.WithResource(res),
-		sdktrace.WithBatcher(exporter),
+	tp := trace.NewTracerProvider(
+		trace.WithSampler(trace.AlwaysSample()),
+		trace.WithResource(res),
+		trace.WithBatcher(exporter),
 	)
-	otel.SetTracerProvider(tp)
 	return tp
 }
