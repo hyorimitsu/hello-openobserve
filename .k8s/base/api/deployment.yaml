@@ -5,6 +5,12 @@ metadata:
   namespace: app
   labels:
     app: app-api
+  # To allow Prometheus to pull metrics
+  #   See here：https://medium.com/penguin-lab/research-about-annotations-such-as-prometheus-io-scrape-6cba3121de59
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/path: /api/metrics
+    prometheus.io/port: "8080"
 spec:
   ports:
     - port: 8080
