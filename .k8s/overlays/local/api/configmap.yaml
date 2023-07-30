@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: app-api-config
 data:
-  NAME: "hello-openobserve"
+  NAME: "sample_openobserve"
   VERSION: "0.0.1"
   ENV: "local"
   BASE_URL: "/api"

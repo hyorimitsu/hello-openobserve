@@ -5,36 +5,37 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/labstack/echo-contrib/echoprometheus"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/labstack/echo/otelecho"
 	"go.opentelemetry.io/otel"
 
-	"github.com/hyorimitsu/hello-openobserve/api/config"
-	"github.com/hyorimitsu/hello-openobserve/api/pkg/tel"
+	"github.com/hyorimitsu/sample-openobserve/api/config"
+	"github.com/hyorimitsu/sample-openobserve/api/tel"
 )
 
-var tracer = otel.Tracer("github.com/hyorimitsu/hello-openobserve/api")
+var tracer = otel.Tracer("github.com/hyorimitsu/sample-openobserve/api")
 
 func main() {
-	option := tel.OTelHttpConfig{
-		ExporterConfig: tel.OTelHttpExporterConfig{
+	cfg := tel.OTelConfig{
+		ExporterConfig: tel.OTelExporterConfig{
 			Host:          config.OTelExporterHost,
 			Port:          config.OTelExporterPort,
 			UrlPath:       config.OTelExporterUrlPath,
 			Authorization: config.OTelExporterAuthorization,
 			IsEnabledSSL:  config.Env != "local",
 		},
-		AttributesConfig: tel.OTelHttpAttributesConfig{
+		AttributesConfig: tel.OTelAttributesConfig{
 			Name:        config.Name,
 			Version:     config.Version,
 			Environment: config.Env,
 		},
 	}
 
-	tracerProvider, err := tel.InitOTelHttpTracer(option)
+	tracerProvider, err := tel.InitOTelTracer(cfg)
 	if err != nil {
-		fmt.Println("[Error] Unable to initialize OTel HTTP exporter")
+		fmt.Println("[Error] Unable to initialize OTel exporter: ", err)
 		return
 	}
 	defer func() {
@@ -47,8 +48,10 @@ func main() {
 
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
+	e.Use(echoprometheus.NewMiddleware(config.Name))
 	e.Use(otelecho.Middleware(config.Name))
 
+	e.GET(config.BaseUrl+"/metrics", echoprometheus.NewHandler())
 	e.GET(config.BaseUrl+"/hello", hello)
 
 	e.Logger.Fatal(e.Start(":" + config.Port))
