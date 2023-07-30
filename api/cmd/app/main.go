@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/labstack/echo-contrib/echoprometheus"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/labstack/echo/otelecho"
@@ -47,8 +48,10 @@ func main() {
 
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
+	e.Use(echoprometheus.NewMiddleware(config.NameForPrometheus))
 	e.Use(otelecho.Middleware(config.Name))
 
+	e.GET(config.BaseUrl+"/metrics", echoprometheus.NewHandler())
 	e.GET(config.BaseUrl+"/hello", hello)
 
 	e.Logger.Fatal(e.Start(":" + config.Port))
