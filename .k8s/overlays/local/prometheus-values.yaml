@@ -1,0 +1,16 @@
+alertmanager:
+  enabled: false
+
+server:
+  ingress:
+    enabled: true
+    annotations:
+      nginx.ingress.kubernetes.io/rewrite-target: /$1
+    path: /prometheus/(.*)
+    hosts:
+      - hello-openobserve.localhost.com
+  remoteWrite:
+    - url: http://openobserve.openobserve:5080/api/default/prometheus/api/v1/write
+      basic_auth:
+        username: root@example.com
+        password: Complexpass#123
