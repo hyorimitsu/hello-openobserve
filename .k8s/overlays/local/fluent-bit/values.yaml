@@ -13,17 +13,3 @@ config:
         HTTP_User root@example.com
         HTTP_Passwd Complexpass#123
         compress gzip
-
-    [OUTPUT]
-        Name http
-        Match *
-        URI /api/default/default/_json
-        Host openobserve.openobserve
-        Port 5080
-        tls Off
-        Format json
-        Json_date_key    _timestamp
-        Json_date_format iso8601
-        HTTP_User root@example.com
-        HTTP_Passwd Complexpass#123
-        compress gzip
