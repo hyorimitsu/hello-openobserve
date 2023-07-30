@@ -1,4 +1,4 @@
-Hello OpenObserve
+Sample OpenObserve
 ---
 
 This is a sample of [OpenObserve](https://openobserve.ai/), a cloud native observability platform (Logs, Metrics, Traces).
@@ -47,16 +47,16 @@ This is a sample of logging, metrics and tracing of an application using [OpenOb
 2. Call API
 
    ```shell
-   curl http://hello-openobserve.localhost.com/app/api/hello
+   curl http://sample-openobserve.localhost.com/app/api/hello
    ```
 
 3. Confirm OpenObserve
 
    Please refer to the following for confirmation.
 
-   - [Logs](https://github.com/hyorimitsu/hello-openobserve/blob/main/README.md#logs)
+   - [Logs](https://github.com/hyorimitsu/sample-openobserve/blob/main/README.md#logs)
    - Metrics (TODO)
-   - [Traces](https://github.com/hyorimitsu/hello-openobserve/blob/main/README.md#traces)
+   - [Traces](https://github.com/hyorimitsu/sample-openobserve/blob/main/README.md#traces)
 
 4. Stop the application in minikube
 
@@ -72,14 +72,14 @@ This is a sample of logging, metrics and tracing of an application using [OpenOb
 This sample uses [Fluent Bit](https://fluentbit.io/) to ingest logs.  
 Check the [official docs](https://openobserve.ai/docs/ingestion/logs/) for other support tools.
 
-![logs_architecture](https://github.com/hyorimitsu/hello-openobserve/blob/main/docs/img/logs_architecture.png)
+![logs_architecture](https://github.com/hyorimitsu/sample-openobserve/blob/main/docs/img/logs_architecture.png)
 
 ### Usage
 
 To check the logs, please visit the following page in browser.  
-(Please [see here](https://github.com/hyorimitsu/hello-openobserve/blob/main/.k8s/overlays/local/openobserve/configmap.yaml#L6-L7) for `Email` and `Password`)
+(Please [see here](https://github.com/hyorimitsu/sample-openobserve/blob/main/.k8s/overlays/local/openobserve/configmap.yaml#L6-L7) for `Email` and `Password`)
 
-http://hello-openobserve.localhost.com/web/logs?org_identifier=default
+http://sample-openobserve.localhost.com/web/logs?org_identifier=default
 
 For example, the logs for this sample application can be obtained with the following query.
 
@@ -87,7 +87,7 @@ For example, the logs for this sample application can be obtained with the follo
 kubernetes_container_name='app-api'
 ```
 
-![logs_ui](https://github.com/hyorimitsu/hello-openobserve/blob/main/docs/img/logs_ui.png)
+![logs_ui](https://github.com/hyorimitsu/sample-openobserve/blob/main/docs/img/logs_ui.png)
 
 
 ## Traces
@@ -96,19 +96,19 @@ kubernetes_container_name='app-api'
 
 This sample uses [OpenTelemetry](https://opentelemetry.io/) to ingest traces.
 
-![traces_architecture](https://github.com/hyorimitsu/hello-openobserve/blob/main/docs/img/traces_architecture.png)
+![traces_architecture](https://github.com/hyorimitsu/sample-openobserve/blob/main/docs/img/traces_architecture.png)
 
 ### Usage
 
 To check the traces, please visit the following page in browser.  
-(Please [see here](https://github.com/hyorimitsu/hello-openobserve/blob/main/.k8s/overlays/local/openobserve/configmap.yaml#L6-L7) for `Email` and `Password`)
+(Please [see here](https://github.com/hyorimitsu/sample-openobserve/blob/main/.k8s/overlays/local/openobserve/configmap.yaml#L6-L7) for `Email` and `Password`)
 
-http://hello-openobserve.localhost.com/web/traces?org_identifier=default
+http://sample-openobserve.localhost.com/web/traces?org_identifier=default
 
 For example, the traces for this sample application can be obtained with the following query.
 
 ```shell
-service_name='hello-openobserve'
+service_name='sample-openobserve'
 ```
 
-![traces_ui](https://github.com/hyorimitsu/hello-openobserve/blob/main/docs/img/traces_ui.png)
+![traces_ui](https://github.com/hyorimitsu/sample-openobserve/blob/main/docs/img/traces_ui.png)

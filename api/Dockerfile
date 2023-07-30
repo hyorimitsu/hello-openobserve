@@ -1,6 +1,6 @@
 FROM golang:1.20.6 as build-env
 
-ENV APPDIR=$GOPATH/src/github.com/hyorimitsu/hello-openobserve/api \
+ENV APPDIR=$GOPATH/src/github.com/hyorimitsu/sample-openobserve/api \
     CGO_ENABLED=0 \
     GOOS=linux
 

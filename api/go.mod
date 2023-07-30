@@ -1,4 +1,4 @@
-module github.com/hyorimitsu/hello-openobserve/api
+module github.com/hyorimitsu/sample-openobserve/api
 
 go 1.20
 

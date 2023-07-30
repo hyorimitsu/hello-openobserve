@@ -8,8 +8,8 @@ stop down:
 
 deps:
 	docker compose -f ./tools/compose-tools.yaml run --rm \
-		-v "$(PWD)/api":"/go/src/github.com/hyorimitsu/hello-openobserve/api" \
-		-w "/go/src/github.com/hyorimitsu/hello-openobserve/api" \
+		-v "$(PWD)/api":"/go/src/github.com/hyorimitsu/sample-openobserve/api" \
+		-w "/go/src/github.com/hyorimitsu/sample-openobserve/api" \
 		go-mod
 
 logs-%:

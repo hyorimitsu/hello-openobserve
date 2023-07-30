@@ -11,11 +11,11 @@ import (
 	"go.opentelemetry.io/contrib/instrumentation/github.com/labstack/echo/otelecho"
 	"go.opentelemetry.io/otel"
 
-	"github.com/hyorimitsu/hello-openobserve/api/config"
-	"github.com/hyorimitsu/hello-openobserve/api/tel"
+	"github.com/hyorimitsu/sample-openobserve/api/config"
+	"github.com/hyorimitsu/sample-openobserve/api/tel"
 )
 
-var tracer = otel.Tracer("github.com/hyorimitsu/hello-openobserve/api")
+var tracer = otel.Tracer("github.com/hyorimitsu/sample-openobserve/api")
 
 func main() {
 	cfg := tel.OTelConfig{
