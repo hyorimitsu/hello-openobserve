@@ -1,4 +1,4 @@
-FROM golang:1.20.3 as build-env
+FROM golang:1.20.6 as build-env
 
 ENV APPDIR=$GOPATH/src/github.com/hyorimitsu/hello-openobserve/api \
     CGO_ENABLED=0 \

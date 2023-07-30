@@ -15,7 +15,7 @@ patches:
 helmCharts:
   - name: fluent-bit
     repo: https://fluent.github.io/helm-charts
-    version: 0.36.0
+    version: 0.37.0
     namespace: fluent-bit
     releaseName: fluent-bit
     valuesFile: fluent-bit-values.yaml
