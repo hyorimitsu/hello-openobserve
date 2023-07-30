@@ -8,6 +8,10 @@ This is a sample of [OpenObserve](https://openobserve.ai/), a cloud native obser
 
 This is a sample of logging, metrics and tracing of an application using [OpenObserve](https://openobserve.ai/).
 
+NOTE:
+This repository is intended for confirm the features of OpenObserve, and for the sake of simplification, sensitive information such as passwords is hard-coded.
+When actually integrating it into an application, it is necessary to properly manage sensitive information using tools like [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets).
+
 
 ## Structure
 
