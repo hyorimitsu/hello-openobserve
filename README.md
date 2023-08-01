@@ -10,7 +10,7 @@ This is a sample of logging, metrics and tracing of an application using [OpenOb
 
 NOTE:
 This repository is intended for confirm the features of OpenObserve, and for the sake of simplification, sensitive information such as passwords is hard-coded.
-When actually integrating it into an application, it is necessary to properly manage sensitive information using tools like [Sealed Secrets](https://github.com/bitnami-labs/sealed-secrets).
+When actually integrating it into an application, it is necessary to properly manage sensitive information using tools like [External Secrets Operator](https://external-secrets.io/).
 
 
 ## Structure
